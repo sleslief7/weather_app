@@ -13,8 +13,12 @@ export function buildCurrentWeatherDisplay(data, symbol) {
     icon,
     feelsLike,
     conditions,
+    days,
     today,
   } = data;
+
+  let tempmin = days[0].tempmin;
+  let tempmax = days[0].tempmax;
 
   today = today.replaceAll('-', '/');
   let windUnit = symbol === 'F' ? 'm/h' : 'k/h';
@@ -66,6 +70,14 @@ export function buildCurrentWeatherDisplay(data, symbol) {
             <p class="opacity-50 text-xl">Sunset</p>
             <p class="data text-3xl">${sunsetTime}</p>
           </div>
+          <div id="min-temp">
+            <p class="opacity-50 text-xl">Min</p>
+            <p class="data text-3xl">${tempmin.toFixed(1)} &#176${symbol}</p>
+          </div>
+          <div id="sunset">
+            <p class="opacity-50 text-xl">Max</p>
+            <p class="data text-3xl">${tempmax.toFixed(1)} &#176${symbol}</p>
+          </div>
   `;
 }
 
@@ -89,6 +101,7 @@ export function buildDayWeatherDisplay(data, symbol) {
 
 function generateDayElement(weekDay, icon, tempmin, symbol, tempmax, precip) {
   const dayContainer = document.createElement('div');
+  let precipitationUnit = symbol === 'F' ? 'in' : 'mm';
   dayContainer.classList.add('day-info', 'text-xl');
   dayContainer.innerHTML = `
     <div class="flex forecast-cell">
@@ -96,7 +109,7 @@ function generateDayElement(weekDay, icon, tempmin, symbol, tempmax, precip) {
     <img src='./icons/${icon}.png'/>
     </div>
     <div class="forecast-cell">
-    ${(precip * 100).toFixed(1)}%
+    ${precip.toFixed(1)} ${precipitationUnit}
     </div>
     <div class="forecast-cell">
     ${tempmin.toFixed(1)} &#176${symbol}

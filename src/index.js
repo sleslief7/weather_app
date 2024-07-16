@@ -14,6 +14,7 @@ let unit = 'us';
 async function getWeatherData() {
   const key = 'NNLN4Z75359CFNQG2HTRGAV7J';
   let location = locationInput.value ? locationInput.value : 'wayne';
+
   try {
     let response = await fetch(
       `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?lang=en&key=${key}&unitGroup=${unit}`
@@ -60,6 +61,7 @@ function createDaysDisplay(data, symbol) {
   let daysContainer = document.getElementById('days-container');
   daysContainer.innerHTML = '';
   daysContainer.appendChild(generateDaysHeaderElement());
+
   for (let i = 1; i < data.days.length - 7; i++) {
     daysContainer.appendChild(buildDayWeatherDisplay(data.days[i], symbol));
   }
@@ -81,7 +83,7 @@ searchBtn.addEventListener('click', (e) => {
 
 fahrenheitBtn.addEventListener('click', () => {
   unit = 'us';
-  refreshDisplay();
+  refreshDisplay('F');
 });
 
 celsiusBtn.addEventListener('click', () => {
@@ -92,6 +94,7 @@ celsiusBtn.addEventListener('click', () => {
 function generateDaysHeaderElement() {
   const headerRow = document.createElement('div');
   headerRow.classList.add('day-info', 'text-2xl', 'header');
+
   headerRow.innerHTML = `
     <div class="forecast-cell">
       Day

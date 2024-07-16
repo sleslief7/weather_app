@@ -94,3 +94,35 @@ body {
 .github-link:hover {
   color: #0e2d44;
 }
+
+@media only screen and (max-width: 650px) {
+  #header {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+  }
+  #current-data {
+    width: 70%;
+    justify-content: center;
+    text-align: center;
+  }
+  #current-weather-info {
+    padding: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+  #days-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    font-size: 1rem;
+  }
+  .forecast-cell {
+    min-width: 80px;
+  }
+}
